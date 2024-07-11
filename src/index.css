@@ -5,3 +5,7 @@
 .my-container {
   @apply mx-auto container;
 }
+
+.my-border {
+  @apply border-2 border-red-700;
+}
