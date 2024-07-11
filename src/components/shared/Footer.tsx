@@ -4,12 +4,12 @@ const Footer = () => {
       <div className="footer p-10 my-container text-white">
         <div className="mx-auto lg:ml-0 text-center lg:text-start">
           <div className="mx-auto lg:ml-0">
-            <h1 className="text-xl font-semibold">
-              The Key<span className="italic text-red-700">stroke</span>
+            <h1 className="text-xl lg:text-3xl font-semibold">
+              Key<span className="italic text-red-700">stroke</span>
             </h1>
           </div>
           <p>
-            The Keystroke Industries Ltd.
+            Keystroke Industries Ltd.
             <br />
             Providing quality products since 2012
           </p>
@@ -36,9 +36,7 @@ const Footer = () => {
         </div>
       </div>
       <div className="footer footer-center p-4 bg-slate-900 text-white">
-        <p>
-          Copyright © 2024 - All right reserved by The Keystroke Industries Ltd
-        </p>
+        <p>Copyright © 2024 - All right reserved by Keystroke Industries Ltd</p>
       </div>
     </footer>
   );

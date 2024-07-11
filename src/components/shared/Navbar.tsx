@@ -1,4 +1,5 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
+import { FaShoppingCart } from "react-icons/fa";
 
 const Navbar = () => {
   const listItem = (
@@ -63,6 +64,11 @@ const Navbar = () => {
           Dashboard
         </NavLink>
       </li>
+      <li>
+        <Link to="/cart-items">
+          <FaShoppingCart className="text-2xl text-red-700" />
+        </Link>
+      </li>
     </>
   );
 
@@ -95,16 +101,20 @@ const Navbar = () => {
             </ul>
           </div>
           <div className="hidden lg:flex">
-            <h1 className="text-2xl font-semibold">
-              The Key<span className="italic text-red-700">stroke</span>
-            </h1>
+            <Link to="/">
+              <h1 className="text-2xl font-semibold">
+                Key<span className="italic text-red-700">stroke</span>
+              </h1>
+            </Link>
           </div>
         </div>
         <div className="navbar-center">
           <div className="lg:hidden">
-            <h1 className="text-xl font-semibold">
-              The Key<span className="italic text-red-700">stroke</span>
-            </h1>
+            <Link to="/">
+              <h1 className="text-xl font-semibold">
+                Key<span className="italic text-red-700">stroke</span>
+              </h1>
+            </Link>
           </div>
         </div>
         <div className="navbar-end">
