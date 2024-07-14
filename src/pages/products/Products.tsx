@@ -1,12 +1,20 @@
 import React, { useRef, useState } from "react";
 import Product from "../home/product/Product";
 import "../products/Products.css";
+import { useGetProductsQuery } from "../../redux/features/products/productsApi";
+import { getAllProducts } from "../../redux/features/products/productSlice";
+import { useAppSelector } from "../../redux/hook";
 
 const Products = () => {
+  //* states
   const [selectedFilter, setSelectedFilter] = useState<string>("Filter");
   const [rangeValue, setRangeValue] = useState<number>(100);
   const [search, setSearch] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
+
+  //* hooks
+  const { isLoading, isError } = useGetProductsQuery();
+  const products = useAppSelector(getAllProducts);
 
   const handleSearch = (event: React.SyntheticEvent) => {
     event.preventDefault();

@@ -6,8 +6,14 @@ import Brands from "./brands/Brands";
 import Testimonials from "./testimonials/Testimonials";
 import Switches from "./switches/Switches";
 import Articles from "./articles/Articles";
+import { useGetProductsQuery } from "../../redux/features/products/productsApi";
+import { getAllProducts } from "../../redux/features/products/productSlice";
+import { useAppSelector } from "../../redux/hook";
 
 const Home = () => {
+  const { isLoading, isError } = useGetProductsQuery(6);
+  const products = useAppSelector(getAllProducts);
+
   return (
     <main>
       {/* Hero */}
