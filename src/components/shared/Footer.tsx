@@ -1,12 +1,16 @@
+import { Link } from "react-router-dom";
+
 const Footer = () => {
   return (
     <footer className="bg-black">
       <div className="footer p-10 my-container text-white">
         <div className="mx-auto lg:ml-0 text-center lg:text-start">
           <div className="mx-auto lg:ml-0">
-            <h1 className="text-xl lg:text-3xl font-semibold">
-              Key<span className="italic text-red-700">stroke</span>
-            </h1>
+            <Link to="/">
+              <h1 className="text-xl lg:text-3xl font-semibold">
+                Key<span className="italic text-rose-500">stroke</span>
+              </h1>
+            </Link>
           </div>
           <p>
             Keystroke Industries Ltd.
@@ -23,8 +27,16 @@ const Footer = () => {
         </div>
         <div className="mx-auto lg:ml-0">
           <span className="footer-title mb-6 mx-auto lg:ml-0">Company</span>
-          <a className="link link-hover mx-auto lg:ml-0">About us</a>
-          <a className="link link-hover mx-auto lg:ml-0">Contact</a>
+          <Link to="/about">
+            <p className="link link-hover mx-auto lg:ml-0 hover:underline">
+              About us
+            </p>
+          </Link>
+          <Link to="contact">
+            <p className="link link-hover mx-auto lg:ml-0 hover:underline">
+              Contact
+            </p>
+          </Link>
           <a className="link link-hover mx-auto lg:ml-0">Jobs</a>
           <a className="link link-hover mx-auto lg:ml-0">Press kit</a>
         </div>

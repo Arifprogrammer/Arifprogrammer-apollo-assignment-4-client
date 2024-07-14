@@ -29,13 +29,13 @@ const Brands = () => {
       {brands.map((brand, i) => {
         return (
           <React.Fragment key={i}>
-            <div className="px-12 py-6 shadow-lg rounded-md flex flex-col gap-6 bg-white">
+            <div className="px-12 py-6 shadow-lg rounded-md flex flex-col gap-6 bg-white items-center">
               <img
                 src={brand.image}
                 alt="Brand image"
-                className="size-60 object-contain grow"
+                className="size-32 md:size-40 object-contain grow"
               />
-              <p className="text-center text-black italic">"{brand.title}"</p>
+              <p className="text-black italic">"{brand.title}"</p>
             </div>
           </React.Fragment>
         );

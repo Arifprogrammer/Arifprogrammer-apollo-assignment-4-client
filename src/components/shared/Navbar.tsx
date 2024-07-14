@@ -9,8 +9,8 @@ const Navbar = () => {
           to="/"
           className={({ isActive }) =>
             isActive
-              ? "text-red-700 font-semibold lg:border-b-4 border-b-red-700"
-              : "font-semibold lg:border-b-4 lg:border-b-white hover:border-b-red-700 lg:text-white hover:text-red-700 lg:transition lg:duration-200"
+              ? "text-rose-500 font-semibold lg:border-b-4 border-b-rose-500"
+              : "font-semibold lg:border-b-4 lg:border-b-white hover:border-b-rose-500 lg:text-white hover:text-rose-500 lg:transition lg:duration-200"
           }
         >
           Home
@@ -21,8 +21,8 @@ const Navbar = () => {
           to="/products"
           className={({ isActive }) =>
             isActive
-              ? "text-red-700 font-semibold lg:border-b-4 border-b-red-700"
-              : "font-semibold lg:border-b-4 lg:border-b-white hover:border-b-red-700 lg:text-white hover:text-red-700 lg:transition lg:duration-200"
+              ? "text-rose-500 font-semibold lg:border-b-4 border-b-rose-500"
+              : "font-semibold lg:border-b-4 lg:border-b-white hover:border-b-rose-500 lg:text-white hover:text-rose-500 lg:transition lg:duration-200"
           }
         >
           Products
@@ -33,8 +33,8 @@ const Navbar = () => {
           to="/about"
           className={({ isActive }) =>
             isActive
-              ? "text-red-700 font-semibold lg:border-b-4 border-b-red-700"
-              : "font-semibold lg:border-b-4 lg:border-b-white hover:border-b-red-700 lg:text-white hover:text-red-700 lg:transition lg:duration-200"
+              ? "text-rose-500 font-semibold lg:border-b-4 border-b-rose-500"
+              : "font-semibold lg:border-b-4 lg:border-b-white hover:border-b-rose-500 lg:text-white hover:text-rose-500 lg:transition lg:duration-200"
           }
         >
           About Us
@@ -45,8 +45,8 @@ const Navbar = () => {
           to="/contact"
           className={({ isActive }) =>
             isActive
-              ? "text-red-700 font-semibold lg:border-b-4 border-b-red-700"
-              : "font-semibold lg:border-b-4 lg:border-b-white hover:border-b-red-700 lg:text-white hover:text-red-700 lg:transition lg:duration-200"
+              ? "text-rose-500 font-semibold lg:border-b-4 border-b-rose-500"
+              : "font-semibold lg:border-b-4 lg:border-b-white hover:border-b-rose-500 lg:text-white hover:text-rose-500 lg:transition lg:duration-200"
           }
         >
           Contact Us
@@ -57,8 +57,8 @@ const Navbar = () => {
           to="/dashboard"
           className={({ isActive }) =>
             isActive
-              ? "text-red-700 font-semibold lg:border-b-4 border-b-red-700"
-              : "font-semibold lg:border-b-4 lg:border-b-white hover:border-b-red-700 lg:text-white hover:text-red-700 lg:transition lg:duration-200"
+              ? "text-rose-500 font-semibold lg:border-b-4 border-b-rose-500"
+              : "font-semibold lg:border-b-4 lg:border-b-white hover:border-b-rose-500 lg:text-white hover:text-rose-500 lg:transition lg:duration-200"
           }
         >
           Dashboard
@@ -66,7 +66,7 @@ const Navbar = () => {
       </li>
       <li>
         <Link to="/cart-items">
-          <FaShoppingCart className="text-2xl text-red-700" />
+          <FaShoppingCart className="text-2xl text-rose-500" />
         </Link>
       </li>
     </>
@@ -103,7 +103,7 @@ const Navbar = () => {
           <div className="hidden lg:flex">
             <Link to="/">
               <h1 className="text-2xl font-semibold">
-                Key<span className="italic text-red-700">stroke</span>
+                Key<span className="italic text-rose-500">stroke</span>
               </h1>
             </Link>
           </div>
@@ -112,7 +112,7 @@ const Navbar = () => {
           <div className="lg:hidden">
             <Link to="/">
               <h1 className="text-xl font-semibold">
-                Key<span className="italic text-red-700">stroke</span>
+                Key<span className="italic text-rose-500">stroke</span>
               </h1>
             </Link>
           </div>

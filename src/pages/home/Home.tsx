@@ -4,22 +4,30 @@ import Services from "./services/Services";
 import Product from "./product/Product";
 import Brands from "./brands/Brands";
 import Testimonials from "./testimonials/Testimonials";
+import Switches from "./switches/Switches";
+import Articles from "./articles/Articles";
 
 const Home = () => {
   return (
     <main>
       {/* Hero */}
-      <section className="pt-24 bg-black">
+      <section className="pt-12 md:pt-24 bg-black">
         <img src={keyboard} alt="keyboard" className="size-full" />
       </section>
 
       {/* Services */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 my-24 my-container">
+      <h1 className="text-center text-4xl text-slate-600 mt-24 mb-6 font-bold">
+        Services
+      </h1>
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24 my-container">
         <Services />
       </section>
 
       {/* Products */}
-      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 my-24 my-container">
+      <h1 className="text-center text-4xl text-slate-600 mt-24 mb-6 font-bold">
+        Featured Products
+      </h1>
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24 my-container">
         {[1, 2, 3, 4, 5, 6].map((item) => {
           return (
             <React.Fragment key={item}>
@@ -27,16 +35,42 @@ const Home = () => {
             </React.Fragment>
           );
         })}
+
+        <div className="btn bg-rose-500 text-white border-none col-span-full w-fit px-20 mx-auto">
+          See all
+        </div>
       </section>
 
       {/* Brands */}
-      <section className="grid grid-cols-1 md:grid-cols-4 gap-6 my-24 my-container">
+      <h1 className="text-center text-4xl text-slate-600 mt-24 mb-6 font-bold">
+        Popular Brands
+      </h1>
+      <section className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-24 my-container">
         <Brands />
       </section>
 
       {/* Testimonials */}
-      <section className="my-24 bg-gray-100 rounded-lg my-container">
+      <h1 className="text-center text-4xl text-slate-600 mt-24 mb-6 font-bold">
+        Reviews
+      </h1>
+      <section className="mb-24 bg-gray-100 rounded-lg my-container">
         <Testimonials />
+      </section>
+
+      {/* Switches */}
+      <h1 className="text-center text-4xl text-slate-600 mt-24 mb-6 font-bold">
+        Customizable Switches
+      </h1>
+      <section className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-24 my-container">
+        <Switches />
+      </section>
+
+      {/* Articles */}
+      <h1 className="text-center text-4xl text-slate-600 mt-24 mb-6 font-bold">
+        Articles
+      </h1>
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24 my-container">
+        <Articles />
       </section>
     </main>
   );

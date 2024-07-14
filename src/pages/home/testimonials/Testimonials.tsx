@@ -54,16 +54,16 @@ const Testimonials = () => {
             <SwiperSlide key={i}>
               <div className="py-12 px-4 flex flex-col justify-center items-center w-full gap-6">
                 <div className="flex gap-2 text-yellow-500">
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
-                  <FaStar />
+                  <FaStar className="text-black" />
+                  <FaStar className="text-black" />
+                  <FaStar className="text-black" />
+                  <FaStar className="text-black" />
+                  <FaStar className="text-black" />
                 </div>
-                <h3 className="text-2xl text-red-700 font-bold">
+                <h3 className="text-2xl text-rose-500 font-bold text-center mx-auto">
                   {review.title}
                 </h3>
-                <p className="text-center mx-auto w-1/2 text-gray-600">
+                <p className="text-center mx-auto w-4/5 md:w-1/2 text-gray-600">
                   {review.description}
                 </p>
                 <div className="avatar pt-4">

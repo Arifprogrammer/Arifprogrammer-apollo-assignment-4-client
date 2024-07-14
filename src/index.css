@@ -3,9 +3,9 @@
 @tailwind utilities;
 
 .my-container {
-  @apply mx-auto container;
+  @apply px-4 md:px-0 mx-auto container;
 }
 
 .my-border {
-  @apply border-2 border-red-700;
+  @apply border-2 border-rose-500;
 }
