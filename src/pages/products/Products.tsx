@@ -1,9 +1,11 @@
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Product from "../home/product/Product";
 import "../products/Products.css";
 import { useGetProductsQuery } from "../../redux/features/products/productsApi";
 import { getAllProducts } from "../../redux/features/products/productSlice";
 import { useAppSelector } from "../../redux/hook";
+import { TProduct } from "../../types";
+import { select, sort } from "radash";
 
 const Products = () => {
   //* constants
@@ -11,6 +13,7 @@ const Products = () => {
   const maxRangeValue = 500;
 
   //* states
+  const [products, setProducts] = useState<TProduct[]>([]);
   const [minSliderValue, setMinSliderValue] = useState<number>(minRangeValue);
   const [maxSliderValue, setMaxSliderValue] = useState<number>(maxRangeValue);
   const [selectedFilter, setSelectedFilter] = useState<string>("Filter");
@@ -19,8 +22,7 @@ const Products = () => {
 
   //* hooks
   const { isLoading } = useGetProductsQuery(0);
-  const { products } = useAppSelector(getAllProducts);
-  let newProducts = products;
+  const { products: allProducts } = useAppSelector(getAllProducts);
 
   // Handle min range change
   const handleMinRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -60,10 +62,55 @@ const Products = () => {
     setMinSliderValue(0);
     setMaxSliderValue(500);
     setSearch("");
+    setProducts(allProducts);
 
     inputRef.current!.value = "";
-    newProducts = products;
   };
+
+  //* effects
+  useEffect(() => {
+    allProducts.length && setProducts(allProducts);
+  }, [allProducts]);
+
+  useEffect(() => {
+    console.log(minSliderValue, maxSliderValue, selectedFilter, search);
+    let filterProducts: TProduct[];
+
+    filterProducts = select(
+      allProducts,
+      (f) => f,
+      (f) =>
+        f.title.toLowerCase().includes(search.toLowerCase()) ||
+        f.brand.toLowerCase().includes(search.toLowerCase())
+    );
+
+    if (selectedFilter === "High" || selectedFilter === "Low") {
+      filterProducts = sort(
+        filterProducts,
+        (f) => f.price,
+        selectedFilter === "High"
+      );
+    }
+
+    if (minSliderValue || !minSliderValue) {
+      filterProducts = select(
+        filterProducts,
+        (f) => f,
+        (f) => f.price >= minSliderValue
+      );
+    }
+
+    if (maxSliderValue) {
+      filterProducts = select(
+        filterProducts,
+        (f) => f,
+        (f) => f.price <= maxSliderValue
+      );
+    }
+
+    console.log(filterProducts);
+    setProducts(filterProducts);
+  }, [minSliderValue, maxSliderValue, selectedFilter, search, allProducts]);
 
   return (
     <>
@@ -146,10 +193,14 @@ const Products = () => {
         </div>
       </div>
 
+      {isLoading && (
+        <div className="text-center">
+          <span className="loading loading-bars loading-md"></span>
+        </div>
+      )}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24 my-container">
-        {isLoading && <span className="loading loading-bars loading-md"></span>}
-        {newProducts &&
-          newProducts.map((product) => {
+        {products &&
+          products.map((product) => {
             return (
               <React.Fragment key={product._id}>
                 <Product product={product} />

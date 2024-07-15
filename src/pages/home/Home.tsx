@@ -34,8 +34,12 @@ const Home = () => {
       <h1 className="text-center text-4xl text-slate-600 mt-24 mb-6 font-bold">
         Featured Products
       </h1>
+      {isLoading && (
+        <div className="text-center">
+          <span className="loading loading-bars loading-md"></span>
+        </div>
+      )}
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24 my-container">
-        {isLoading && <span className="loading loading-bars loading-md"></span>}
         {products &&
           products.map((product) => {
             return (
