@@ -9,10 +9,11 @@ import Articles from "./articles/Articles";
 import { useGetProductsQuery } from "../../redux/features/products/productsApi";
 import { getAllProducts } from "../../redux/features/products/productSlice";
 import { useAppSelector } from "../../redux/hook";
+import { Link } from "react-router-dom";
 
 const Home = () => {
-  const { isLoading, isError } = useGetProductsQuery(6);
-  const products = useAppSelector(getAllProducts);
+  const { isLoading } = useGetProductsQuery(6);
+  const { products } = useAppSelector(getAllProducts);
 
   return (
     <main>
@@ -34,17 +35,20 @@ const Home = () => {
         Featured Products
       </h1>
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24 my-container">
-        {[1, 2, 3, 4, 5, 6].map((item) => {
-          return (
-            <React.Fragment key={item}>
-              <Product />
-            </React.Fragment>
-          );
-        })}
-
-        <div className="btn bg-rose-500 text-white border-none col-span-full w-fit px-20 mx-auto">
-          See all
-        </div>
+        {isLoading && <span className="loading loading-bars loading-md"></span>}
+        {products &&
+          products.map((product) => {
+            return (
+              <React.Fragment key={product._id}>
+                <Product product={product} />
+              </React.Fragment>
+            );
+          })}
+        <Link to="/products" className="col-span-full w-fit mx-auto">
+          <button className="btn bg-rose-500 text-white border-none px-20">
+            See all
+          </button>
+        </Link>
       </section>
 
       {/* Brands */}

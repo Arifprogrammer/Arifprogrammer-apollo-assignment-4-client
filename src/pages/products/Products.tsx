@@ -6,15 +6,42 @@ import { getAllProducts } from "../../redux/features/products/productSlice";
 import { useAppSelector } from "../../redux/hook";
 
 const Products = () => {
+  //* constants
+  const minRangeValue = 0;
+  const maxRangeValue = 500;
+
   //* states
+  const [minSliderValue, setMinSliderValue] = useState<number>(minRangeValue);
+  const [maxSliderValue, setMaxSliderValue] = useState<number>(maxRangeValue);
   const [selectedFilter, setSelectedFilter] = useState<string>("Filter");
-  const [rangeValue, setRangeValue] = useState<number>(100);
   const [search, setSearch] = useState<string>("");
   const inputRef = useRef<HTMLInputElement>(null);
 
   //* hooks
-  const { isLoading, isError } = useGetProductsQuery();
-  const products = useAppSelector(getAllProducts);
+  const { isLoading } = useGetProductsQuery(0);
+  const { products } = useAppSelector(getAllProducts);
+  let newProducts = products;
+
+  // Handle min range change
+  const handleMinRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMinSliderValue(Number(event.target.value));
+  };
+
+  // Handle max range change
+  const handleMaxRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setMaxSliderValue(Number(event.target.value));
+  };
+
+  // Calculate max bubble position
+  const calculateMinBubblePosition = () => {
+    const percentage = (minSliderValue / maxRangeValue) * 100;
+    return `calc(${percentage}% + (${8 - percentage * 0.15}px))`;
+  };
+  // Calculate max bubble position
+  const calculateMaxBubblePosition = () => {
+    const percentage = (maxSliderValue / maxRangeValue) * 100;
+    return `calc(${percentage}% + (${8 - percentage * 0.15}px))`;
+  };
 
   const handleSearch = (event: React.SyntheticEvent) => {
     event.preventDefault();
@@ -28,16 +55,14 @@ const Products = () => {
     setSelectedFilter(event.target.value);
   };
 
-  const handleRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setRangeValue(parseInt(event.target.value));
-  };
-
   const handleReset = () => {
     setSelectedFilter("Filter");
-    setRangeValue(100);
+    setMinSliderValue(0);
+    setMaxSliderValue(500);
     setSearch("");
 
     inputRef.current!.value = "";
+    newProducts = products;
   };
 
   return (
@@ -60,22 +85,44 @@ const Products = () => {
           </div>
         </form>
 
-        <div className="slider-container">
-          <input
-            type="range"
-            min="0"
-            max="100"
-            value={rangeValue}
-            onChange={handleRangeChange}
-            className="slider"
-          />
-          <div
-            className="bubble"
-            style={{
-              left: `calc(${rangeValue}% + (${8 - rangeValue * 0.15}px))`,
-            }}
-          >
-            {rangeValue}
+        <div className="flex gap-2 items-end text-black">
+          <p className="pb-1">min</p>
+          <div className="slider-container">
+            <input
+              type="range"
+              min={minRangeValue}
+              max={maxRangeValue}
+              value={minSliderValue}
+              onChange={handleMinRangeChange}
+              className="slider"
+            />
+            <div
+              className="bubble"
+              style={{
+                left: calculateMinBubblePosition(),
+              }}
+            >
+              {minSliderValue}
+            </div>
+          </div>
+          <p className="pb-1">max</p>
+          <div className="slider-container">
+            <input
+              type="range"
+              min={minRangeValue}
+              max={maxRangeValue}
+              value={maxSliderValue}
+              onChange={handleMaxRangeChange}
+              className="slider"
+            />
+            <div
+              className="bubble"
+              style={{
+                left: calculateMaxBubblePosition(),
+              }}
+            >
+              {maxSliderValue}
+            </div>
           </div>
         </div>
 
@@ -100,13 +147,15 @@ const Products = () => {
       </div>
 
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24 my-container">
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => {
-          return (
-            <React.Fragment key={item}>
-              <Product />
-            </React.Fragment>
-          );
-        })}
+        {isLoading && <span className="loading loading-bars loading-md"></span>}
+        {newProducts &&
+          newProducts.map((product) => {
+            return (
+              <React.Fragment key={product._id}>
+                <Product product={product} />
+              </React.Fragment>
+            );
+          })}
       </section>
     </>
   );
