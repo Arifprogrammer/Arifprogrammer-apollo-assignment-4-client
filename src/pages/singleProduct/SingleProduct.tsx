@@ -1,12 +1,15 @@
 import { useParams } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import { getAllProducts } from "../../redux/features/products/productSlice";
-import { useAppSelector } from "../../redux/hook";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { setToCart } from "../../redux/features/cart/cartSlice";
 
 const SingleProduct = () => {
   const { id } = useParams();
   const { products } = useAppSelector(getAllProducts);
   const product = products.find((product) => product._id === id);
+
+  const dispatch = useAppDispatch();
 
   return (
     <section className="min-h-screen  py-8 lg:py-20 px-4 md:px-8 lg:px-0 lg:w-1/2 lg:mx-auto">
@@ -42,7 +45,10 @@ const SingleProduct = () => {
                   <FaStar />
                 </div>
                 <p className="font-bold text-lg">${product.price}</p>
-                <button className="btn bg-black text-white mt-4">
+                <button
+                  className="btn bg-black text-white mt-4"
+                  onClick={() => dispatch(setToCart(product))}
+                >
                   Add to Cart
                 </button>
               </div>

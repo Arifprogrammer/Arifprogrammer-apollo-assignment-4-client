@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { getTotalPrice } from "../../redux/features/cart/cartSlice";
+import { useAppSelector } from "../../redux/hook";
 
 const InputField = ({
   label,
@@ -29,6 +31,7 @@ const InputField = ({
 
 const Checkout = () => {
   const navigate = useNavigate();
+  const totalPrice = useAppSelector(getTotalPrice);
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -82,6 +85,13 @@ const Checkout = () => {
           </option>
         </select>
       </div>
+
+      <p>
+        Total Price:{" "}
+        <span className="text-lg text-rose-500 font-semibold">
+          ${totalPrice.toFixed(2)}
+        </span>
+      </p>
 
       <button type="submit" className="w-full btn bg-black text-white">
         Place Order

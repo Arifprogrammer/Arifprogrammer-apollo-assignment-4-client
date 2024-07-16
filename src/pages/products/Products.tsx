@@ -73,7 +73,6 @@ const Products = () => {
   }, [allProducts]);
 
   useEffect(() => {
-    console.log(minSliderValue, maxSliderValue, selectedFilter, search);
     let filterProducts: TProduct[];
 
     filterProducts = select(
@@ -108,7 +107,6 @@ const Products = () => {
       );
     }
 
-    console.log(filterProducts);
     setProducts(filterProducts);
   }, [minSliderValue, maxSliderValue, selectedFilter, search, allProducts]);
 

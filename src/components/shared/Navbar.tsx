@@ -1,7 +1,11 @@
 import { Link, NavLink } from "react-router-dom";
 import { FaShoppingCart } from "react-icons/fa";
+import { getTotalOrderQuantity } from "../../redux/features/cart/cartSlice";
+import { useAppSelector } from "../../redux/hook";
 
 const Navbar = () => {
+  const totalOrderQuantity = useAppSelector(getTotalOrderQuantity);
+
   const listItem = (
     <>
       <li>
@@ -66,7 +70,12 @@ const Navbar = () => {
       </li>
       <li>
         <Link to="/cart-items">
-          <FaShoppingCart className="text-2xl text-rose-500" />
+          <div className="relative">
+            <p className="absolute text-sm bg-white text-black h-4 w-4 font-medium flex items-center justify-center rounded-full -top-3 -right-3">
+              {totalOrderQuantity}
+            </p>
+            <FaShoppingCart className="text-2xl text-rose-500" />
+          </div>
         </Link>
       </li>
     </>

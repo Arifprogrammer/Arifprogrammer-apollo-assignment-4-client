@@ -1,71 +1,114 @@
 import { MdDeleteForever } from "react-icons/md";
-import keyboard from "../../assets/images/keyboard.webp";
 import { Link } from "react-router-dom";
-import { useState } from "react";
 import { FaMinus, FaPlus } from "react-icons/fa";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import {
+  decreaseQuantity,
+  deleteFromCart,
+  getCartProducts,
+  getTotalOrderQuantity,
+  getTotalPrice,
+  setToCart,
+} from "../../redux/features/cart/cartSlice";
+import { useEffect, useState } from "react";
+import { select } from "radash";
 
 const CartItems = () => {
-  const [quantity, setQuantity] = useState(5); // Initial quantity from props or default
+  //* state
+  const [error, setError] = useState<boolean>(false);
 
-  const handleIncrement = () => {
-    setQuantity((prevQuantity) => prevQuantity + 1);
-  };
+  //* hooks
+  const products = useAppSelector(getCartProducts);
+  const totalOrderQuantity = useAppSelector(getTotalOrderQuantity);
+  const totalPrice = useAppSelector(getTotalPrice);
+  const dispatch = useAppDispatch();
 
-  const handleDecrement = () => {
-    setQuantity((prevQuantity) => Math.max(prevQuantity - 1, 0)); // Ensure minimum 0
-  };
+  //* effects
+  useEffect(() => {
+    const filterOutOfStockProducts = select(
+      products,
+      (f) => f,
+      (f) => f.orderQuantity > f.availableQuantity
+    );
 
-  const deleteItem = () => {};
+    if (filterOutOfStockProducts.length) setError(true);
+    else setError(false);
+  }, [products]);
 
   return (
-    <section className="my-container my-24">
-      <div className="border-[#95A0A7] border-[1px] md:w-1/2 mx-auto rounded-lg flex flex-col md:flex-row items-center gap-4 p-2 pr-6">
-        <img
-          src={keyboard}
-          alt=""
-          className="size-48 object-cover rounded-lg"
-        />
-        <div className="details flex-1 text-black text-xl text-center md:text-start  space-y-2">
-          <h1>Keyboard</h1>
-          <p>Price: $5</p>
-          <div className="quantity-control flex items-center gap-2">
+    <section className="my-container my-24 space-y-4">
+      {products.length ? (
+        products.map((product) => (
+          <div
+            key={product._id}
+            className="border-[#95A0A7] border-[1px] md:w-1/2 mx-auto rounded-lg flex flex-col md:flex-row items-center gap-4 p-2 pr-6"
+          >
+            <img
+              src={product.image}
+              alt=""
+              className="size-48 object-cover rounded-lg"
+            />
+            <div className="details flex-1 text-black text-xl text-center md:text-start  space-y-2">
+              <h1>{product.title}</h1>
+              <p>Price: ${product.price}</p>
+              <div className="quantity-control flex items-center gap-2">
+                <button
+                  className="rounded-full h-8 w-8 bg-gray-200 grid place-items-center text-black"
+                  onClick={() => dispatch(decreaseQuantity(product._id))}
+                  disabled={product.orderQuantity === 0}
+                >
+                  <FaMinus />
+                </button>
+                <p className="px-2">Quantity: {product.orderQuantity}</p>
+                <button
+                  className="rounded-full h-8 w-8 bg-gray-200 grid place-items-center text-black"
+                  onClick={() => dispatch(setToCart(product))}
+                >
+                  <FaPlus />
+                </button>
+              </div>
+            </div>
             <button
-              className="rounded-full h-8 w-8 bg-gray-200 grid place-items-center text-black"
-              onClick={handleDecrement}
-              disabled={quantity === 0} // Disable minus button if quantity is 0
+              className="rounded-full h-14 w-14 bg-rose-300 grid place-items-center text-black"
+              onClick={() => dispatch(deleteFromCart(product._id))}
             >
-              <FaMinus />
-            </button>
-            <p className="px-2">Quantity: {quantity}</p>
-            <button
-              className="rounded-full h-8 w-8 bg-gray-200 grid place-items-center text-black"
-              onClick={handleIncrement}
-            >
-              <FaPlus />
+              <MdDeleteForever className="text-3xl" />
             </button>
           </div>
+        ))
+      ) : (
+        <p className="text-2xl text-center text-rose-500 font-semibold">
+          You have no items on the cart
+        </p>
+      )}
+
+      {products.length ? (
+        <div className="pt-6 text-black text-xl md:w-1/2 mx-auto">
+          <p>
+            Total Quantity:{" "}
+            <span className="font-medium">{totalOrderQuantity}</span>
+          </p>
+          <p>
+            Total Price:{" "}
+            <span className="text-2xl text-rose-500 font-semibold">
+              ${totalPrice.toFixed(2)}
+            </span>
+          </p>
+          <Link to="/checkout">
+            <button
+              className="btn bg-rose-500 text-white border-none mt-4"
+              disabled={error}
+            >
+              Proceed to Checkout
+            </button>
+          </Link>
+          {error && (
+            <p className="text-rose-500 text-sm font-semibold">
+              You've exceeded one or multiple products' quantity limit
+            </p>
+          )}
         </div>
-        <button
-          className="rounded-full h-14 w-14 bg-rose-300 grid place-items-center text-black"
-          onClick={() => deleteItem()}
-        >
-          <MdDeleteForever className="text-3xl" />
-        </button>
-      </div>
-      <div className="pt-6 text-black text-xl md:w-1/2 mx-auto">
-        <p>
-          Selected Items: <span className="font-medium">10</span>
-        </p>
-        <p>
-          Total Price:{" "}
-          <span className="text-2xl text-rose-500 font-semibold">$1000</span>
-        </p>
-        <Link to="/checkout">
-          <button className="btn bg-rose-500 text-white border-none mt-4">
-            Checkout
-          </button>
-        </Link>
-      </div>
+      ) : null}
     </section>
   );
 };
