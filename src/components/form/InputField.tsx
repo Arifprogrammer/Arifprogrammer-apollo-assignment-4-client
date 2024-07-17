@@ -24,7 +24,6 @@ export const InputField = ({
       type={type}
       id={id}
       name={name}
-      min={type === "number" ? 1 : undefined}
       defaultValue={defaultValue}
       className="w-full px-3 py-2 bg-transparent border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
       required

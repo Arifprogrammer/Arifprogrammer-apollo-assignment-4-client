@@ -1,6 +1,7 @@
-import { FaStar } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { TProduct } from "../../../types";
+import { Rating } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
 
 const Product = ({ product }: { product: TProduct }) => {
   return (
@@ -24,10 +25,7 @@ const Product = ({ product }: { product: TProduct }) => {
               ? `Remaining items: ${product.availableQuantity}`
               : "Out of stock"}
           </p>
-          <div className="flex gap-x-1 items-center w-8">
-            <p>{product.rating}</p>
-            <FaStar />
-          </div>
+          <Rating style={{ maxWidth: 100 }} readOnly value={product.rating} />
           <p className="font-bold">${product.price}</p>
         </div>
         <div className="card-actions w-full">

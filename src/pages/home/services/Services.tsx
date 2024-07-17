@@ -10,7 +10,7 @@ const Services = () => {
   return (
     <>
       <div
-        className="border-4 border-rose-500 hover:border-black py-8 px-4 lg:p-10 text-center space-y-4 rounded-md"
+        className=" py-8 px-4 lg:p-10 text-center space-y-4 rounded-lg bg-slate-200 shadow-lg"
         data-aos="fade-up"
         data-aos-delay="40"
         data-aos-duration="2000"
@@ -25,7 +25,7 @@ const Services = () => {
         </p>
       </div>
       <div
-        className="border-4 border-black py-8 px-4 lg:p-10 text-center space-y-4 rounded-md"
+        className=" py-8 px-4 lg:p-10 text-center space-y-4 rounded-lg bg-slate-200 shadow-lg"
         data-aos="fade-up"
         data-aos-delay="40"
         data-aos-duration="2000"
@@ -40,7 +40,7 @@ const Services = () => {
         </p>
       </div>
       <div
-        className="border-4 border-rose-500 hover:border-black py-8 px-4 lg:p-10 text-center space-y-4 rounded-md"
+        className=" py-8 px-4 lg:p-10 text-center space-y-4 rounded-lg bg-slate-200 shadow-lg"
         data-aos="fade-up"
         data-aos-delay="40"
         data-aos-duration="2000"

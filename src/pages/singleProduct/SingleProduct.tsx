@@ -1,8 +1,9 @@
 import { useParams } from "react-router-dom";
-import { FaStar } from "react-icons/fa";
 import { getAllProducts } from "../../redux/features/products/productSlice";
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { setToCart } from "../../redux/features/cart/cartSlice";
+import { Rating } from "@smastrom/react-rating";
+import "@smastrom/react-rating/style.css";
 
 const SingleProduct = () => {
   const { id } = useParams();
@@ -40,10 +41,11 @@ const SingleProduct = () => {
                     ? `Remaining items: ${product.availableQuantity}`
                     : "Out of stock"}
                 </p>
-                <div className="flex gap-x-1 items-center w-8">
-                  <p>{product.rating}</p>
-                  <FaStar />
-                </div>
+                <Rating
+                  style={{ maxWidth: 100 }}
+                  readOnly
+                  value={product.rating}
+                />
                 <p className="font-bold text-lg">${product.price}</p>
                 <button
                   className="btn bg-black text-white mt-4"

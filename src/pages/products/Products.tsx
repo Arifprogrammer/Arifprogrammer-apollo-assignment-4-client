@@ -1,11 +1,11 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Product from "../home/product/Product";
 import "../products/Products.css";
 import { useGetProductsQuery } from "../../redux/features/products/productsApi";
 import { getAllProducts } from "../../redux/features/products/productSlice";
 import { useAppSelector } from "../../redux/hook";
 import { TProduct } from "../../types";
-import { select, sort } from "radash";
+import { debounce, select, sort } from "radash";
 
 const Products = () => {
   //* constants
@@ -18,53 +18,66 @@ const Products = () => {
   const [maxSliderValue, setMaxSliderValue] = useState<number>(maxRangeValue);
   const [selectedFilter, setSelectedFilter] = useState<string>("Filter");
   const [search, setSearch] = useState<string>("");
-  const inputRef = useRef<HTMLInputElement>(null);
 
   //* hooks
   const { isLoading, refetch } = useGetProductsQuery(0);
   const { products: allProducts } = useAppSelector(getAllProducts);
 
-  // Handle min range change
+  //? DebouncedSetMinValue
+  const debouncedUpdateMinValue = debounce({ delay: 50 }, (value: number) => {
+    setMinSliderValue(value);
+  });
+
+  //? DebouncedSetMaxValue
+  const debouncedUpdateMaxValue = debounce({ delay: 50 }, (value: number) => {
+    setMaxSliderValue(value);
+  });
+
+  //? Handle min range change
   const handleMinRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setMinSliderValue(Number(event.target.value));
+    const value = Number(event.target.value);
+    debouncedUpdateMinValue(value);
   };
 
-  // Handle max range change
+  //? Handle max range change
   const handleMaxRangeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setMaxSliderValue(Number(event.target.value));
+    const value = Number(event.target.value);
+    debouncedUpdateMaxValue(value);
   };
 
-  // Calculate max bubble position
+  //? Calculate max bubble position
   const calculateMinBubblePosition = () => {
     const percentage = (minSliderValue / maxRangeValue) * 100;
     return `calc(${percentage}% + (${8 - percentage * 0.15}px))`;
   };
-  // Calculate max bubble position
+  //? Calculate max bubble position
   const calculateMaxBubblePosition = () => {
     const percentage = (maxSliderValue / maxRangeValue) * 100;
     return `calc(${percentage}% + (${8 - percentage * 0.15}px))`;
   };
 
-  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const target = event.target as typeof event.target & {
-      search: { value: string };
-    };
-    setSearch(target.search.value);
+  //? DebouncedSetSearch
+  const debouncedSetSearch = debounce({ delay: 200 }, (value: string) => {
+    setSearch(value);
+  });
+
+  //? Handle search change
+  const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
+    debouncedSetSearch(event.target.value);
   };
 
+  //? Handle filter change
   const handleFilterChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedFilter(event.target.value);
   };
 
+  //? Handle reset filters
   const handleReset = () => {
     setSelectedFilter("Filter");
     setMinSliderValue(0);
     setMaxSliderValue(500);
     setSearch("");
     setProducts(allProducts);
-
-    inputRef.current!.value = "";
   };
 
   //* effects
@@ -117,22 +130,18 @@ const Products = () => {
   return (
     <>
       <div className="mt-16 mb-10 my-container flex flex-col md:flex-row gap-4 md:gap-6 items-center md:items-center ">
-        <form onSubmit={handleSearch} className="grow">
-          <div className="join">
-            <input
-              name="search"
-              ref={inputRef}
-              className="input input-bordered border-rose-500 rounded-l-3xl bg-transparent join-item w-full md:w-96 text-black"
-              placeholder="search..."
-            />
-            <button
-              type="submit"
-              className="btn join-item rounded-r-full bg-rose-500 text-white border-none"
-            >
-              Search
-            </button>
-          </div>
-        </form>
+        <div className="join grow">
+          <input
+            name="search"
+            className="input input-bordered border-rose-500 rounded-l-3xl bg-transparent join-item w-full md:w-96 text-black"
+            placeholder="search..."
+            value={search}
+            onChange={handleSearch}
+          />
+          <button className="btn join-item rounded-r-full bg-rose-500 text-white border-none">
+            Search
+          </button>
+        </div>
 
         <div className="flex gap-2 items-end text-black">
           <p className="pb-1">min</p>
