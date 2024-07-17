@@ -1,6 +1,12 @@
 import { useNavigate } from "react-router-dom";
-import { getTotalPrice } from "../../redux/features/cart/cartSlice";
-import { useAppSelector } from "../../redux/hook";
+import {
+  getCartProducts,
+  getTotalPrice,
+  resetCart,
+} from "../../redux/features/cart/cartSlice";
+import { useAppDispatch, useAppSelector } from "../../redux/hook";
+import { useUpdateProductsMutation } from "../../redux/features/products/productsApi";
+import { pick } from "radash";
 
 const InputField = ({
   label,
@@ -32,11 +38,20 @@ const InputField = ({
 const Checkout = () => {
   const navigate = useNavigate();
   const totalPrice = useAppSelector(getTotalPrice);
+  const products = useAppSelector(getCartProducts);
+  const [updateProducts] = useUpdateProductsMutation();
+  const dispatch = useAppDispatch();
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    const { data } = await updateProducts(
+      products.map((product) => pick(product, ["_id", "orderQuantity"]))
+    ).unwrap();
 
-    navigate("/success");
+    if (data?.modifiedCount) {
+      dispatch(resetCart());
+      navigate("/success");
+    }
   };
 
   return (

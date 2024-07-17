@@ -5,14 +5,12 @@ import { sum } from "radash";
 
 type TInitialState = {
   cart: TProduct[];
-  error: boolean;
   totalOrderQuantity: number;
   totalPrice: number;
 };
 
 const initialState: TInitialState = {
   cart: [],
-  error: false,
   totalOrderQuantity: 0,
   totalPrice: 0,
 };
@@ -57,6 +55,12 @@ const cartSlice = createSlice({
       state.totalOrderQuantity = calculateTotalOrderQuantity(state.cart);
       state.totalPrice = calculateTotalPrice(state.cart);
     },
+
+    resetCart: (state) => {
+      state.cart = [];
+      state.totalOrderQuantity = 0;
+      state.totalPrice = 0;
+    },
   },
 });
 
@@ -68,7 +72,7 @@ const calculateTotalPrice = (cart: TProduct[]) => {
   return sum(cart, (f) => f.orderQuantity * f.price);
 };
 
-export const { setToCart, decreaseQuantity, deleteFromCart } =
+export const { setToCart, decreaseQuantity, deleteFromCart, resetCart } =
   cartSlice.actions;
 
 export default cartSlice.reducer;

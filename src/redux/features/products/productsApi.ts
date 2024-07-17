@@ -8,6 +8,7 @@ const productsApi = baseApi.injectEndpoints({
         url: limit ? `/products?limit=${limit}` : "/products",
         method: "GET",
       }),
+      providesTags: ["products"],
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
@@ -17,7 +18,17 @@ const productsApi = baseApi.injectEndpoints({
         }
       },
     }),
+    updateProducts: builder.mutation({
+      query: (products: { _id: string; orderQuantity: number }[]) => {
+        return {
+          url: "/products",
+          method: "PUT",
+          body: products,
+        };
+      },
+      invalidatesTags: ["products"],
+    }),
   }),
 });
 
-export const { useGetProductsQuery } = productsApi;
+export const { useGetProductsQuery, useUpdateProductsMutation } = productsApi;
