@@ -27,7 +27,7 @@ const SingleProduct = () => {
               <div>
                 <p className="text-slate-600">{product.brand}</p>
                 <h2 className="card-title text-2xl text-black">
-                  {product.title}
+                  {product.name}
                   <div className="badge bg-rose-300 border-none text-black">
                     NEW
                   </div>

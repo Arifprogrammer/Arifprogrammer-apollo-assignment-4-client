@@ -16,7 +16,7 @@ const Product = ({ product }: { product: TProduct }) => {
         <div className="card-body grow bg-rose-200 text-slate-700">
           <p className="text-slate-600">{product.brand}</p>
           <h2 className="card-title text-xl">
-            {product.title}
+            {product.name}
             <div className="badge bg-rose-500 border-none text-black">NEW</div>
           </h2>
           <p>

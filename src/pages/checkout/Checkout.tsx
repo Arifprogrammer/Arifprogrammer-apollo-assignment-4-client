@@ -7,33 +7,7 @@ import {
 import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { useUpdateProductsMutation } from "../../redux/features/products/productsApi";
 import { pick } from "radash";
-
-const InputField = ({
-  label,
-  id,
-  type,
-  required,
-}: {
-  label: string;
-  id: string;
-  type: string;
-  required: boolean;
-}) => (
-  <div className="mb-4">
-    <label
-      htmlFor={id}
-      className="block text-sm font-medium text-gray-700 mb-1"
-    >
-      {label} {required && "*"}
-    </label>
-    <input
-      type={type}
-      id={id}
-      className="w-full px-3 py-2 bg-transparent border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-      required
-    />
-  </div>
-);
+import { InputField } from "../../components/form/InputField";
 
 const Checkout = () => {
   const navigate = useNavigate();

@@ -21,7 +21,7 @@ const Products = () => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   //* hooks
-  const { isLoading } = useGetProductsQuery(0);
+  const { isLoading, refetch } = useGetProductsQuery(0);
   const { products: allProducts } = useAppSelector(getAllProducts);
 
   // Handle min range change
@@ -45,7 +45,7 @@ const Products = () => {
     return `calc(${percentage}% + (${8 - percentage * 0.15}px))`;
   };
 
-  const handleSearch = (event: React.SyntheticEvent) => {
+  const handleSearch = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     const target = event.target as typeof event.target & {
       search: { value: string };
@@ -69,6 +69,10 @@ const Products = () => {
 
   //* effects
   useEffect(() => {
+    refetch();
+  }, [refetch]);
+
+  useEffect(() => {
     allProducts.length && setProducts(allProducts);
   }, [allProducts]);
 
@@ -79,7 +83,7 @@ const Products = () => {
       allProducts,
       (f) => f,
       (f) =>
-        f.title.toLowerCase().includes(search.toLowerCase()) ||
+        f.name.toLowerCase().includes(search.toLowerCase()) ||
         f.brand.toLowerCase().includes(search.toLowerCase())
     );
 

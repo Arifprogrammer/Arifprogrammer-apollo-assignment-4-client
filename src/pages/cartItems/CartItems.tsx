@@ -49,7 +49,7 @@ const CartItems = () => {
               className="size-48 object-cover rounded-lg"
             />
             <div className="details flex-1 text-black text-xl text-center md:text-start  space-y-2">
-              <h1>{product.title}</h1>
+              <h1>{product.name}</h1>
               <p>Price: ${product.price}</p>
               <div className="quantity-control flex items-center gap-2">
                 <button

@@ -9,6 +9,7 @@ import CartItems from "../pages/cartItems/CartItems";
 import SingleProduct from "../pages/singleProduct/SingleProduct";
 import Checkout from "../pages/checkout/Checkout";
 import Success from "../pages/success/Success";
+import ProductManagement from "../pages/dashboard/management/ProductManagement";
 
 export const router = createBrowserRouter([
   {
@@ -50,6 +51,16 @@ export const router = createBrowserRouter([
       {
         path: "/success",
         element: <Success />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard />,
+    children: [
+      {
+        index: true,
+        element: <ProductManagement />,
       },
     ],
   },

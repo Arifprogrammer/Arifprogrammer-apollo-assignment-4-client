@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import keyboard from "../../assets/images/keyboard.webp";
 import Services from "./services/Services";
 import Product from "./product/Product";
@@ -12,9 +12,13 @@ import { useAppSelector } from "../../redux/hook";
 import { Link } from "react-router-dom";
 
 const Home = () => {
-  const { isLoading } = useGetProductsQuery(6);
+  const { isLoading, refetch } = useGetProductsQuery(6);
   const { products } = useAppSelector(getAllProducts);
 
+  //* effects
+  useEffect(() => {
+    refetch();
+  }, [refetch]);
   return (
     <main>
       {/* Hero */}
