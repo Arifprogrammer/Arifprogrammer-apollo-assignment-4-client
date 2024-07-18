@@ -10,11 +10,13 @@ import SingleProduct from "../pages/singleProduct/SingleProduct";
 import Checkout from "../pages/checkout/Checkout";
 import Success from "../pages/success/Success";
 import ProductManagement from "../pages/dashboard/management/ProductManagement";
+import ErrorPage from "../pages/errorPage/ErrorPage";
 
 export const router = createBrowserRouter([
   {
     path: "/",
     element: <App />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
@@ -57,6 +59,7 @@ export const router = createBrowserRouter([
   {
     path: "/dashboard",
     element: <Dashboard />,
+    errorElement: <ErrorPage />,
     children: [
       {
         index: true,
