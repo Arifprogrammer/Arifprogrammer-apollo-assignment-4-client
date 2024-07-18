@@ -104,91 +104,89 @@ export default function EditProductModal({
               leaveFrom="opacity-100 translate-y-0 sm:scale-100"
               leaveTo="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
             >
-              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-black text-left shadow-xl transition-all sm:my-8 sm:w-full lg:w-[800px]">
-                <div className="px-4 pb-4 pt-5 sm:p-6 sm:pb-4">
-                  <div className="sm:flex sm:items-start">
-                    <form
-                      className="card-body p-5 lg:p-8 grid grid-cols-1 lg:grid-cols-2 items-center gap-x-6"
-                      onSubmit={onSubmit}
-                    >
-                      <InputField
-                        label="Name"
-                        name="name"
-                        id="name"
-                        type="text"
-                        defaultValue={name}
-                        required
-                      />
-                      <InputField
-                        label="Image Url"
-                        id="url"
-                        name="image"
-                        type="url"
-                        defaultValue={image}
-                        required
-                      />
-                      <InputField
-                        label="Brand"
-                        id="brand"
-                        name="brand"
-                        type="text"
-                        defaultValue={brand}
-                        required
-                      />
-                      <InputField
-                        label="Price"
-                        id="price"
-                        name="price"
-                        defaultValue={price}
-                        type="number"
-                        required
-                      />
-                      <InputField
-                        label="Rating"
-                        id="rating"
-                        name="rating"
-                        defaultValue={rating}
-                        type="number"
-                        required
-                      />
-                      <InputField
-                        label="Quantity"
-                        id="quantity"
-                        name="availableQuantity"
-                        defaultValue={availableQuantity}
-                        type="number"
-                        required
-                      />
-                      <div className="form-control col-span-2">
-                        <label className="label">
-                          <span className="label-text text-black font-semibold text-base">
-                            Description*
-                          </span>
-                        </label>
-                        <textarea
-                          name="description"
-                          className="textarea textarea-bordered text-black font-semibold h-32 rounded-md bg-white"
-                          defaultValue={description ? description : ""}
-                        ></textarea>
-                      </div>
-                      <div></div>
-                      <div className="px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                        <button
-                          type="button"
-                          onClick={() => setOpen(false)}
-                          className="inline-flex justify-center rounded-md bg-gray-200 px-3 py-2 text-sm font-semibold text-blue-900 shadow-sm hover:bg-gray-400 hover:text-black sm:ml-3 sm:w-auto gap-x-2"
-                        >
-                          Cancel
-                        </button>
-                        <button
-                          type="submit"
-                          className="inline-flex justify-center rounded-md bg-lime-400 px-3 py-2 text-sm font-semibold text-blue-900 shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto gap-x-2"
-                        >
-                          {name && price ? "Update" : "Create"}
-                        </button>
-                      </div>
-                    </form>
-                  </div>
+              <Dialog.Panel className="relative transform overflow-hidden rounded-lg bg-white text-black text-left shadow-xl transition-all sm:my-8 w-11/12 lg:w-[800px]">
+                <div className="md:px-4 md:pb-4 pt-5 sm:p-6 sm:pb-4">
+                  <form
+                    className="card-body p-5 md:p-8 gap-x-6 md:grid md:grid-cols-2"
+                    onSubmit={onSubmit}
+                  >
+                    <InputField
+                      label="Name"
+                      name="name"
+                      id="name"
+                      type="text"
+                      defaultValue={name}
+                      required
+                    />
+                    <InputField
+                      label="Image Url"
+                      id="url"
+                      name="image"
+                      type="url"
+                      defaultValue={image}
+                      required
+                    />
+                    <InputField
+                      label="Brand"
+                      id="brand"
+                      name="brand"
+                      type="text"
+                      defaultValue={brand}
+                      required
+                    />
+                    <InputField
+                      label="Price"
+                      id="price"
+                      name="price"
+                      defaultValue={price}
+                      type="number"
+                      required
+                    />
+                    <InputField
+                      label="Rating"
+                      id="rating"
+                      name="rating"
+                      defaultValue={rating}
+                      type="number"
+                      required
+                    />
+                    <InputField
+                      label="Quantity"
+                      id="quantity"
+                      name="availableQuantity"
+                      defaultValue={availableQuantity}
+                      type="number"
+                      required
+                    />
+                    <div className="form-control col-span-2">
+                      <label className="label">
+                        <span className="label-text text-black font-semibold text-base">
+                          Description*
+                        </span>
+                      </label>
+                      <textarea
+                        name="description"
+                        className="textarea textarea-bordered text-black font-semibold h-32 rounded-md bg-white"
+                        defaultValue={description ? description : ""}
+                      ></textarea>
+                    </div>
+                    <div className="hidden lg:block"></div>
+                    <div className="flex gap-2 mt-2 ml-auto">
+                      <button
+                        type="button"
+                        onClick={() => setOpen(false)}
+                        className="inline-flex justify-center rounded-md bg-gray-200 px-3 py-2 text-sm font-semibold text-blue-900 shadow-sm hover:bg-gray-400 hover:text-black sm:ml-3 sm:w-auto gap-x-2"
+                      >
+                        Cancel
+                      </button>
+                      <button
+                        type="submit"
+                        className="inline-flex justify-center rounded-md bg-lime-400 px-3 py-2 text-sm font-semibold text-blue-900 shadow-sm hover:bg-red-500 sm:ml-3 sm:w-auto gap-x-2"
+                      >
+                        {name && price ? "Update" : "Create"}
+                      </button>
+                    </div>
+                  </form>
                 </div>
               </Dialog.Panel>
             </Transition.Child>

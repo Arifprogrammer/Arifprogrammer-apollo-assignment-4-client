@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Product from "../home/product/Product";
 import "../products/Products.css";
 import { useGetProductsQuery } from "../../redux/features/products/productsApi";
@@ -18,6 +18,7 @@ const Products = () => {
   const [maxSliderValue, setMaxSliderValue] = useState<number>(maxRangeValue);
   const [selectedFilter, setSelectedFilter] = useState<string>("Filter");
   const [search, setSearch] = useState<string>("");
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   //* hooks
   const { isLoading, refetch } = useGetProductsQuery(0);
@@ -78,6 +79,8 @@ const Products = () => {
     setMaxSliderValue(500);
     setSearch("");
     setProducts(allProducts);
+
+    (inputRef.current as HTMLInputElement).value = "";
   };
 
   //* effects
@@ -133,9 +136,9 @@ const Products = () => {
         <div className="join grow">
           <input
             name="search"
+            ref={inputRef}
             className="input input-bordered border-rose-500 rounded-l-3xl bg-transparent join-item w-full md:w-96 text-black"
             placeholder="search..."
-            value={search}
             onChange={handleSearch}
           />
           <button className="btn join-item rounded-r-full bg-rose-500 text-white border-none">
@@ -184,23 +187,25 @@ const Products = () => {
           </div>
         </div>
 
-        <select
-          className="select border-rose-500 max-w-xs bg-transparent text-black w-32"
-          value={selectedFilter}
-          onChange={handleFilterChange}
-        >
-          <option disabled>Filter</option>
-          <option value="High">High</option>
-          <option value="Low">Low</option>
-        </select>
-
-        <div>
-          <button
-            className="btn bg-black border-none text-white"
-            onClick={handleReset}
+        <div className="inline-flex gap-4 md:gap-6 items-center">
+          <select
+            className="select border-rose-500 max-w-xs bg-transparent text-black w-32"
+            value={selectedFilter}
+            onChange={handleFilterChange}
           >
-            Reset
-          </button>
+            <option disabled>Filter</option>
+            <option value="High">High</option>
+            <option value="Low">Low</option>
+          </select>
+
+          <div>
+            <button
+              className="btn bg-black border-none text-white"
+              onClick={handleReset}
+            >
+              Reset
+            </button>
+          </div>
         </div>
       </div>
 

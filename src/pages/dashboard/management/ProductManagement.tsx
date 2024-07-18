@@ -68,7 +68,7 @@ const ProductManagement = () => {
   return (
     <>
       <button
-        className="w-fit btn bg-black text-white mb-2"
+        className="w-fit btn bg-black text-white mt-4 md:mt-0 mb-2"
         onClick={() => handleCreateProduct()}
       >
         Add Product

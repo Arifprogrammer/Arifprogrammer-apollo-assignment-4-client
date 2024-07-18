@@ -27,7 +27,7 @@ const Home = () => {
       </section>
 
       {/* Services */}
-      <h1 className="text-center text-4xl text-slate-600 mt-24 mb-6 font-bold">
+      <h1 className="text-center text-2xl md:text-4xl text-slate-600 mt-24 mb-6 font-bold">
         Services
       </h1>
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24 my-container">
@@ -35,7 +35,7 @@ const Home = () => {
       </section>
 
       {/* Products */}
-      <h1 className="text-center text-4xl text-slate-600 mt-24 mb-6 font-bold">
+      <h1 className="text-center text-2xl md:text-4xl text-slate-600 mt-24 mb-6 font-bold">
         Featured Products
       </h1>
       {isLoading && (
@@ -60,7 +60,7 @@ const Home = () => {
       </section>
 
       {/* Brands */}
-      <h1 className="text-center text-4xl text-slate-600 mt-24 mb-6 font-bold">
+      <h1 className="text-center text-2xl md:text-4xl text-slate-600 mt-24 mb-6 font-bold">
         Popular Brands
       </h1>
       <section className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-24 my-container">
@@ -68,7 +68,7 @@ const Home = () => {
       </section>
 
       {/* Testimonials */}
-      <h1 className="text-center text-4xl text-slate-600 mt-24 mb-6 font-bold">
+      <h1 className="text-center text-2xl md:text-4xl text-slate-600 mt-24 mb-6 font-bold">
         Reviews
       </h1>
       <section className="mb-24 bg-gray-100 rounded-lg my-container">
@@ -76,7 +76,7 @@ const Home = () => {
       </section>
 
       {/* Switches */}
-      <h1 className="text-center text-4xl text-slate-600 mt-24 mb-6 font-bold">
+      <h1 className="text-center text-2xl md:text-4xl text-slate-600 mt-24 mb-6 font-bold">
         Customizable Switches
       </h1>
       <section className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-24 my-container">
@@ -84,7 +84,7 @@ const Home = () => {
       </section>
 
       {/* Articles */}
-      <h1 className="text-center text-4xl text-slate-600 mt-24 mb-6 font-bold">
+      <h1 className="text-center text-2xl md:text-4xl text-slate-600 mt-24 mb-6 font-bold">
         Articles
       </h1>
       <section className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-24 my-container">

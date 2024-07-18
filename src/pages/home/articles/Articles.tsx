@@ -36,7 +36,7 @@ const Articles = () => {
                 />
               </div>
               <div className="pl-2 pb-6">
-                <h3 className="text-2xl text-rose-500 font-semibold">
+                <h3 className="text-lg md:text-2xl text-rose-500 font-semibold">
                   {article.title}
                 </h3>
                 <p className="text-gray-500 font-medium">{article.writer}</p>

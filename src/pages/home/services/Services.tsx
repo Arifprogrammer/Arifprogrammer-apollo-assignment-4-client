@@ -16,7 +16,7 @@ const Services = () => {
         data-aos-duration="2000"
       >
         <FaTruck className="text-7xl mx-auto text-black hover:text-rose-500" />
-        <p className="font-bold text-3xl tracking-widest text-black">
+        <p className="font-bold text-xl md:text-3xl tracking-widest text-black">
           Free Shipping
         </p>
         <p className="text-slate-600">
@@ -31,7 +31,7 @@ const Services = () => {
         data-aos-duration="2000"
       >
         <FaClock className="text-7xl mx-auto text-rose-500" />
-        <p className="font-bold text-3xl tracking-widest text-black">
+        <p className="font-bold text-xl md:text-3xl tracking-widest text-black">
           Top-notch Support
         </p>
         <p className="text-slate-600">
@@ -46,7 +46,7 @@ const Services = () => {
         data-aos-duration="2000"
       >
         <FaMoneyCheckAlt className="text-7xl mx-auto text-black hover:text-rose-500" />
-        <p className="font-bold text-3xl tracking-widest text-black">
+        <p className="font-bold text-xl md:text-3xl tracking-widest text-black">
           Money Return
         </p>
         <p className="text-slate-600">

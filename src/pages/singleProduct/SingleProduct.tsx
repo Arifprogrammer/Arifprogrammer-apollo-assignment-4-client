@@ -4,13 +4,34 @@ import { useAppDispatch, useAppSelector } from "../../redux/hook";
 import { setToCart } from "../../redux/features/cart/cartSlice";
 import { Rating } from "@smastrom/react-rating";
 import "@smastrom/react-rating/style.css";
+import Swal from "sweetalert2";
+import { TProduct } from "../../types";
 
 const SingleProduct = () => {
   const { id } = useParams();
   const { products } = useAppSelector(getAllProducts);
   const product = products.find((product) => product._id === id);
-
   const dispatch = useAppDispatch();
+
+  const handleAddToCart = (product: TProduct) => {
+    dispatch(setToCart(product));
+
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      },
+    });
+    Toast.fire({
+      icon: "success",
+      title: "Product added to cart",
+    });
+  };
 
   return (
     <section className="min-h-screen  py-8 lg:py-20 px-4 md:px-8 lg:px-0 lg:w-1/2 lg:mx-auto">
@@ -49,7 +70,7 @@ const SingleProduct = () => {
                 <p className="font-bold text-lg">${product.price}</p>
                 <button
                   className="btn bg-black text-white mt-4"
-                  onClick={() => dispatch(setToCart(product))}
+                  onClick={() => handleAddToCart(product)}
                 >
                   Add to Cart
                 </button>

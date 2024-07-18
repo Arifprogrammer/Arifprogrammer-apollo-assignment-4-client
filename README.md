@@ -1,30 +1,41 @@
-# React + TypeScript + Vite
+# Mechanical Keyboard Shop
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Welcome to the Mechanical Keyboard Shop Client
 
-Currently, two official plugins are available:
+A robust e-commerce frontend for managing a mechanical keyboard store, offering a wide range of keyboards and accessories for enthusiasts and professionals alike.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Prerequisites
 
-## Expanding the ESLint configuration
+Mechanical Keyboard Shop project require **Node** and **npm** (Npm come out of the box with nodejs)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### Installation
 
-- Configure the top-level `parserOptions` property like this:
+- Make sure you latest version of nodejs installed then run the following commands:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```html
+git clone
+https://github.com/Arifprogrammer/Arifprogrammer-apollo-assignment-4-client.git
+// clone the project first pnpm i // run the command on the root of the project
+pnpm dev // run the command on the root of the project to start the project
+locally
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+then go to: `http://localhost:5173/`
+
+### Key Features
+
+- Full CRUD operations for product management
+- Robust Product Filtering
+- Place Order
+- Product Management
+
+### Technology Stack
+
+- React 🟢
+- Redux Toolkit 🌐
+- RTK Query 🍃
+- TypeScript 📘
+
+### Live
+
+[Link](https://mechanical-keyboard-shop-client.vercel.app)
